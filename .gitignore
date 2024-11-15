@@ -1,0 +1,4 @@
+infra/generated/
+infra/.terraform/
+infra/*.tfstate*
+infra/*.lock.hcl
