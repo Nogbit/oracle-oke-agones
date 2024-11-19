@@ -19,7 +19,7 @@ region               = "us-ashburn-1"
 home_region          = "us-ashburn-1"
 tenancy_id           = "ocid1.tenancy.oc1..aaaaaaaag6m7iofeofzt7jvn3w5o57wavjpzi3ptlug7tiwe6673hjimaldq"
 user_id              = "ocid1.user.oc1..aaaaaaaao72reaoq4ybpixyay4n6ujqyzon75lgiir6an7fnlotwqmezgsoq"
-compartment_id       = "ocid1.compartment.oc1..aaaaaaaalikdhkdycqqhufqekkrtrz66k4sk43ozvdorajtmv2xwftmpyrsq"
+compartment_id       = "ocid1.compartment.oc1..aaaaaaaary4ed75bklxmi2qpza4ajqnzb2z4lvzadwlatamolky2hldtipuq"
 
 # SSH keys
 ssh_private_key_path = "~/.ssh/id_rsa"
@@ -29,8 +29,3 @@ ssh_public_key_path  = "~/.ssh/id_rsa.pub"
 cluster_name       = "agones-cluster"
 cluster_type       = "basic"
 kubernetes_version = "v1.30.1"
-
-# Agones
-node_count     = 3
-agones_version = ""
-feature_gates  = ""

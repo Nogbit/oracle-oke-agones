@@ -21,6 +21,73 @@ This step deploys only the Agones components and creates LoadBalancer services f
     terraform plan
     terraform apply
 
+## PRIVATE ENDPOINTS
+
+### Create Agones With Helm
+
+Get the resulting Bastion IP, and the Operator IP.  The Operator will have kubectl and helm installed and access to the K8 control plane.
+
+    terraform output
+
+SSH and get the nodes
+
+    ssh -J opc@<bastion public IP> opc@<operator private ip> kubectl get nodes
+
+Now we need to install the argones helm chart.  Normally you want to install apps seperately from infra.  We will do this manually on the operator by jumping through the bastion.
+
+    terraform output
+    ssh -J opc@<bastion public IP> opc@<operator private ip>
+
+    # Now on the operator
+    helm repo add agones https://agones.dev/chart/stable
+    helm repo update
+    helm install my-release --namespace agones-system --create-namespace agones/agones
+    helm test my-release -n agones-system
+
+Lets get the status of all the agones pods, they should all be running (allocator, controller, extensions, ping)
+
+    kubectl get pods --namespace agones-system
+
+Example output...
+
+    [opc@o-xiteaz ~]$ kubectl get pods --namespace agones-system
+    NAME                                 READY   STATUS    RESTARTS   AGE
+    agones-allocator-79d8dbfcbb-r5k4j    1/1     Running   0          2m23s
+    agones-allocator-79d8dbfcbb-sf6bt    1/1     Running   0          2m23s
+    agones-allocator-79d8dbfcbb-xk4h5    1/1     Running   0          2m23s
+    agones-controller-657c48fdfd-bfl67   1/1     Running   0          2m23s
+    agones-controller-657c48fdfd-gvt2m   1/1     Running   0          2m23s
+    agones-extensions-7bbbf98956-bcjkk   1/1     Running   0          2m23s
+    agones-extensions-7bbbf98956-tbbrx   1/1     Running   0          2m23s
+    agones-ping-6848778bd7-7z76r         1/1     Running   0          2m23s
+    agones-ping-6848778bd7-dg5wp         1/1     Running   0          2m23s
+
+### Create Agones Game Server For Testing
+
+TO DO: For some reason, flow logs that were terraformed do NOT show ACCEPTED or REJECT for port 7003 on these servers
+
+- Follow this guide here https://agones.dev/site/docs/getting-started/create-gameserver/
+
+    kubectl get gameserver
+    nc -u 10.0.158.12 7003
+    HELLO WORLD!
+
+After typing HELLO WORLD you will get a response, you should also see packets coming back to the operator if you have this command running in a seperate shell
+
+     sudo tcpdump -i ens3  port 7003 --direction inout
+
+### Create the Public Network Load Balancer
+
+This is so public game clients can connect to game servers in OKE nodes.
+
+- Understand exactly what it is I'm having the LB create and manage if anything https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengconfiguringloadbalancersnetworkloadbalancers-subtopic.htm
+- Set the correct mode https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingnetworkloadbalancers.htm
+- Create LB
+- Test nc from external IP, ideally we are sticky to the same gameserver???
+
+
+## PUBLIC ENDPOINJTS
+
 ### Test Agones & Infra
 
 - Copy the `./generated/kubeconfig` to `~/.kube/config`

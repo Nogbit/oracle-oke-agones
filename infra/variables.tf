@@ -86,15 +86,10 @@ variable "cluster_type" {
   }
 }
 
-variable "oke_control_plane" {
+variable "oke_public_control_plane" {
   description = "Whether to keep all OKE control planes public or private."
-  default     = "public"
-  type        = string
-
-  validation {
-    condition     = contains(["public", "private"], lower(var.oke_control_plane))
-    error_message = "Accepted values are 'public' or 'private'."
-  }
+  default     = false
+  type        = bool
 }
 
 variable "preferred_cni" {
