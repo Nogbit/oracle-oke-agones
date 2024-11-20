@@ -19,7 +19,7 @@ region               = "us-ashburn-1"
 home_region          = "us-ashburn-1"
 tenancy_id           = "ocid1.tenancy.oc1..aaaaaaaag6m7iofeofzt7jvn3w5o57wavjpzi3ptlug7tiwe6673hjimaldq"
 user_id              = "ocid1.user.oc1..aaaaaaaao72reaoq4ybpixyay4n6ujqyzon75lgiir6an7fnlotwqmezgsoq"
-compartment_id       = "ocid1.compartment.oc1..aaaaaaaary4ed75bklxmi2qpza4ajqnzb2z4lvzadwlatamolky2hldtipuq"
+compartment_id       = "ocid1.compartment.oc1..aaaaaaaa6qsbnljgiegwwubfta7lzfibgtotxiqs3islxswrjpgsklhmnjga"
 
 # SSH keys
 ssh_private_key_path = "~/.ssh/id_rsa"
