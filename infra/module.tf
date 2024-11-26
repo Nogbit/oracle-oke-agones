@@ -52,11 +52,17 @@ module "oke_cluster" {
   create_iam_resources = true
 
   # oke cluster options
-  cluster_name            = var.cluster_name
-  cluster_type            = var.cluster_type
-  cni_type                = var.preferred_cni
-  control_plane_is_public = var.oke_public_control_plane
-  kubernetes_version      = var.kubernetes_version
+  cluster_name                          = var.cluster_name
+  cluster_type                          = var.cluster_type
+  cni_type                              = var.preferred_cni
+  control_plane_is_public               = var.oke_public_control_plane
+  kubernetes_version                    = var.kubernetes_version
+  # Autoscaling info, refer to https://oracle-terraform-modules.github.io/terraform-oci-oke/guide/extensions_cluster_autoscaler.html#usage
+  cluster_autoscaler_install            = true
+  cluster_autoscaler_namespace          = "kube-system"
+  cluster_autoscaler_helm_version       = "9.24.0"
+  cluster_autoscaler_helm_values        = {}
+  cluster_autoscaler_helm_values_files  = []
 
   # security, private control plane but public nodes for game client connections
   bastion_allowed_cidrs             = ["0.0.0.0/0"]
@@ -70,12 +76,31 @@ module "oke_cluster" {
 
   # node pools
   worker_pools = {
-    node_pool_1 = {
-      shape            = "VM.Standard.E3.Flex",
-      ocpus            = 2,
-      memory           = 32,
-      size             = var.node_count,
-      boot_volume_size = 150,
+    node_pool_workers = {
+      shape                     = "VM.Standard.E3.Flex",
+      description               = "Autoscaling node pool with game server workers",
+      ocpus                     = 2,
+      size                      = 3,
+      memory                    = 32,
+      boot_volume_size          = 150,
+      min_size                  = 3,
+      max_size                  = 20,
+      autoscale                 = true,
+      node_labels               = {"agones.dev/agones-worker": "true"}
+    },
+    node_pool_workers-autoscaler = {
+      description      = "Node pool with cluster autoscaler scheduling",
+      size             = 1,
+      allow_autoscaler = true,
+    },
+    node_pool_agones_system = {
+      shape                     = "VM.Standard.E3.Flex",
+      description               = "Node pool for Agones system",
+      size                      = 3,
+      ocpus                     = 2,
+      memory                    = 8,
+      boot_volume_size          = 50,
+      node_labels               = {"agones.dev/agones-system": "true"}
     }
   }
 

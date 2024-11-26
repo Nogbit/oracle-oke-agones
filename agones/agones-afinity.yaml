@@ -1,0 +1,41 @@
+agones:
+  controller:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: oke.oraclecloud.com/cluster_autoscaler
+              operator: In
+              values:
+              - managed
+  ping:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: oke.oraclecloud.com/cluster_autoscaler
+              operator: In
+              values:
+              - managed
+  allocator:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: oke.oraclecloud.com/cluster_autoscaler
+              operator: In
+              values:
+              - managed
+  extensions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: oke.oraclecloud.com/cluster_autoscaler
+              operator: In
+              values:
+              - managed

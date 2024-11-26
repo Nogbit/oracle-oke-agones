@@ -19,7 +19,7 @@ region               = "us-ashburn-1"
 home_region          = "us-ashburn-1"
 tenancy_id           = "ocid1.tenancy.oc1..aaaaaaaag6m7iofeofzt7jvn3w5o57wavjpzi3ptlug7tiwe6673hjimaldq"
 user_id              = "ocid1.user.oc1..aaaaaaaao72reaoq4ybpixyay4n6ujqyzon75lgiir6an7fnlotwqmezgsoq"
-compartment_id       = "ocid1.compartment.oc1..aaaaaaaa6qsbnljgiegwwubfta7lzfibgtotxiqs3islxswrjpgsklhmnjga"
+compartment_id       = "ocid1.compartment.oc1..aaaaaaaa6kspok73gqier2pdvgk7ovkujvtztosm7h53ogid53g5gkvdecbq"
 
 # SSH keys
 ssh_private_key_path = "~/.ssh/id_rsa"
@@ -27,5 +27,5 @@ ssh_public_key_path  = "~/.ssh/id_rsa.pub"
 
 # OKE cluster
 cluster_name       = "agones-cluster"
-cluster_type       = "basic"
+cluster_type       = "enhanced" #enchanced required for addons, autoscaler addon for example
 kubernetes_version = "v1.30.1"

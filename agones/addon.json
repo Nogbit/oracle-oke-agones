@@ -1,0 +1,9 @@
+{
+  "addonName": "ClusterAutoscaler",
+  "configurations": [
+    {
+      "key": "nodes",
+      "value": "3:20:ocid1.nodepool.oc1.iad.aaaaaaaaq6xk45tey56q6p6ojjq3fsgl4wpts75szy5d7m7qnnzspyrckysa"
+    }
+  ]
+}
