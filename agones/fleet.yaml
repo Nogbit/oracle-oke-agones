@@ -3,7 +3,7 @@ kind: Fleet
 metadata:
   name: simple-game-server
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       ports:

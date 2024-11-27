@@ -58,6 +58,7 @@ module "oke_cluster" {
   control_plane_is_public               = var.oke_public_control_plane
   kubernetes_version                    = var.kubernetes_version
   # Autoscaling info, refer to https://oracle-terraform-modules.github.io/terraform-oci-oke/guide/extensions_cluster_autoscaler.html#usage
+  # At this time the autoscaler does not get installed and will need to be installed manually
   cluster_autoscaler_install            = true
   cluster_autoscaler_namespace          = "kube-system"
   cluster_autoscaler_helm_version       = "9.24.0"
