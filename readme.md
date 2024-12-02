@@ -1,13 +1,5 @@
 # Autoscaling OKE Node Pools with Agones Game Servers and Fleets
 
-TO DO
-- Check in with James
-- Maybe ask why the TF install of autoscaler doesnt work, manual install is necessary
-- What is the latest and great place for OCI blog articles
-- Source my code somewhere for the article
-- Write the article
-- Publish the article
-
 ## Prereqs
 
 - You need Tenancy admin because of the dynamic group policy created by the OKE module, other than that everything gets created in the specified compartment withint the terraform.tfvars file

@@ -61,7 +61,7 @@ module "oke_cluster" {
   # At this time the autoscaler does not get installed and will need to be installed manually
   cluster_autoscaler_install            = true
   cluster_autoscaler_namespace          = "kube-system"
-  cluster_autoscaler_helm_version       = "9.24.0"
+  cluster_autoscaler_helm_version       = "9.43.2" # 9.24.0 with tf apply runs without errors but does not install
   cluster_autoscaler_helm_values        = {}
   cluster_autoscaler_helm_values_files  = []
 
